@@ -21,7 +21,7 @@ To deploy new project run following command
   docker compose build
   docker compose up -d
   docker exec --workdir /srv/app laravel sh -c "/usr/bin/composer create-project laravel/laravel laravel"
-  docker exec --workdir /srv/app laravel sh -c "mv laravel/* ."
+  docker exec --workdir /srv/app laravel sh -c "rm -rf public/* && mv laravel/{.*,*} ."
 ```
 website could be able to access from http://laravel.localhost/
 
