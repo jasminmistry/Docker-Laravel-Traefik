@@ -1,0 +1,30 @@
+---
+# accessLog: {}  # uncomment this line to enable access log
+log:
+  level: DEBUG  # ERROR, DEBUG, PANIC, FATAL, ERROR, WARN, INFO
+providers:
+  docker:
+    exposedByDefault: true
+    endpoint: 'unix:///var/run/docker.sock'
+    network: traefik-servicenet
+  file:
+    filename: /etc/traefik/dynamic.yaml
+    watch: true
+api:
+  dashboard: true # if you don't need the dashboard disable it
+  insecure: true
+entryPoints:
+  web:
+    address: ':80' # http
+  web-secure:
+    address: ':443' # https
+certificatesResolvers:
+  tlschallenge:
+    acme:
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory # IMPORTANT: uncomment this line to get production ready certificates. After this, clear acme.json file.
+      email: foobar@example.invalid
+      # storage: /etc/traefik/acme.json # chmod 600 this file on the host system
+      tlsChallenge: {}
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false # disable this if you don't want to send anonymous usage data to traefik
