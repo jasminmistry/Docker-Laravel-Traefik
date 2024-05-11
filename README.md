@@ -24,3 +24,12 @@ To deploy new project run following command
   docker exec --workdir /srv/app laravel sh -c "mv laravel/* ."
 ```
 website could be able to access from http://laravel.localhost/
+
+## Change Host Name 
+
+To change host name edit compose.yaml
+```
+ - "traefik.http.routers.laravel.rule=Host(`laravel.localhost`)"
+```
+
+change Host name from laravel.localhost to any name you want.
